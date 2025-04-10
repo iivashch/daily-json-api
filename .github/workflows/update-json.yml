@@ -11,10 +11,13 @@ jobs:
     env:
       USER_EMAIL: ${{ secrets.USER_EMAIL }}
       FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+      GH_PAT: ${{ secrets.GH_PAT }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}  # Required to commit
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -24,7 +27,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt || true
 
-      - name: Run Python script
+      - name: Run script
         run: python handler.py
 
-      # Skip the git push — let GitHub Pages handle deployment
+      - name: Commit and push updated data
+        run: |
+          git config user.name "iivashch"
+          git config user.email "${USER_EMAIL}"
+          git add docs/data.json
+          git commit -m "Auto-update data.json" || echo "No changes"
+          git push
