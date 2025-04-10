@@ -31,9 +31,10 @@ jobs:
     - name: Commit and push result
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
+        USER_EMAIL: ${{ secrets.USER_EMAIL }}
       run: |
         git config user.name "iivashch"
-        git config user.email USER_EMAIL
+        git config user.email "${USER_EMAIL}"
         git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
         git add docs/data.json
         git commit -m "Daily update of JSON" || echo "No changes to commit"
