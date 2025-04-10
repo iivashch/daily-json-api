@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Environment variables
-FRED_API_KEY = os.getenv("FRED_API")
+FRED_API_KEY = os.getenv("FRED_API_KEY")
 
 FRED_INDICATORS = {
     "CPI": "CPIAUCSL",
