@@ -1,0 +1,6 @@
+yfinance
+pandas
+pandas_datareader
+python-dotenv
+pymongo
+certifi
