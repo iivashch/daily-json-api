@@ -102,6 +102,6 @@ def build_dashboard():
 
 dashboard_data = build_dashboard()
     
-with open("public/data.json", "w") as f:
+with open("docs/data.json", "w") as f:
     json.dump(dashboard_data, f, indent=2)
 print("Dashboard data updated successfully.")
